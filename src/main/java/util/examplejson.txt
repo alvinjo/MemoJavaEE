@@ -1,0 +1,10 @@
+[{"userId":1,"username":"one","password":"two","memos":[{"Id":1,"note":"John","userId":1}]}]
+
+
+user json
+{"username":"two","password":"jwo"}
+
+
+
+memo json
+{"note":"John","userId":1}
