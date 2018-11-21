@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import java.util.Collection;
@@ -35,9 +36,17 @@ public class MemoDBRepo implements IMemoDBRepo {
     }
 
     @Override
-    public String getUsersNotes(Long userId) {
+    public String getUserByName(String user){
+        TypedQuery<User> query = manager.createQuery("select u from User u where u.username = '" + user + "'", User.class);
+        Collection<User> userColl = query.getResultList();
+        return util.objToJson(userColl);
+    }
+
+    @Override
+    public String getUserById(Long userId) {
         return util.objToJson(findUser(userId));
     }
+
 
     @Transactional(REQUIRED)
     @Override

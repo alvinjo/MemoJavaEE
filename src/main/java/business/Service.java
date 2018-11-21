@@ -15,9 +15,11 @@ public class Service {
 
     public String getUsersAll(){return repo.getUsersAll();}
 
-    public String getUsersNotes(Long userId){
-        return repo.getUsersNotes(userId);
+    public String getUserById(Long userId){
+        return repo.getUserById(userId);
     }
+
+    public String getUserByName(String name){return repo.getUserByName(name);}
 
     public String removeNote(Long id){ return repo.removeNote(id); }
 

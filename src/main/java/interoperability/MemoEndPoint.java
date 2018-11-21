@@ -18,11 +18,18 @@ public class MemoEndPoint {
     @Produces({"application/json"})
     public String getUsersAll(){ return service.getUsersAll(); }
 
-    @Path("/getUsersNotes")
+    @Path("/getUserById")
     @POST
     @Produces({"application/json"})
-    public String getUsersNotes(Long userId) {
-        return service.getUsersNotes(userId);
+    public String getUserById(Long userId) {
+        return service.getUserById(userId);
+    }
+
+    @Path("/getUserByName")
+    @POST
+    @Produces({"application/json"})
+    public String getUserByName(String name) {
+        return service.getUserByName(name);
     }
 
     @Path("/addUser")

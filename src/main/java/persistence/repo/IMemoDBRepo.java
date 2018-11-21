@@ -3,7 +3,8 @@ package persistence.repo;
 public interface IMemoDBRepo {
 
     String getUsersAll();
-    String getUsersNotes(Long userId);
+    String getUserById(Long userId);
+    String getUserByName(String user);
     String addUser(String userJson);
     String removeUser(Long id);
     String updateUser(String userJson);
