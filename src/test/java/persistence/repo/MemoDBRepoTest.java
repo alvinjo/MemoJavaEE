@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import persistence.domain.User;
+import persistence.repo.MemoDBRepo;
 import util.JSONUtil;
 
 import javax.persistence.EntityManager;
