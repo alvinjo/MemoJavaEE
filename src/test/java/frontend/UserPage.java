@@ -1,3 +1,4 @@
+/*
 package frontend;
 
 import org.openqa.selenium.WebElement;
@@ -43,3 +44,4 @@ public class UserPage {
         return deleteButton;
     }
 }
+*/
