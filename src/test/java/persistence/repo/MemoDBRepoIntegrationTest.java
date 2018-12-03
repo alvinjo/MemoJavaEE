@@ -21,6 +21,8 @@ public class MemoDBRepoIntegrationTest {
     @Inject
     MemoDBRepo repo;
 
+
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)

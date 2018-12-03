@@ -11,12 +11,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import persistence.domain.User;
 import persistence.repo.MemoDBRepo;
 import util.JSONUtil;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,18 +46,26 @@ public class MemoDBRepoTest {
 
     @Test
     public void getUserByIdTest(){
-//        when(repo.getUserById(any(Long.class))).thenReturn()
         when(util.objToJson(any(Object.class))).thenReturn(USER_JSON);
-//        assertThat(repo.getUserById(1L), is(USER_JSON));
         Assert.assertEquals(USER_JSON, repo.getUserById(1L));
+        Mockito.verify(util).objToJson(any(Object.class));
     }
 
 
     @Test
     @Ignore
     public void getUserByName(){
-        when(repo.getUserByName("one")).thenReturn(USER_JSON);
+        when(manager.createQuery(any(String.class))).thenReturn(any(TypedQuery.class));
+        when(util.objToJson(USER_OBJECT)).thenReturn(USER_JSON);
         assertEquals(USER_JSON, repo.getUserByName("one"));
+        Mockito.verify(util).objToJson(any(Object.class));
+        Mockito.verify(manager).createQuery(any(String.class));
+    }
+
+    @Test
+    public void addUser(){
+        when(util.jsonToObj(USER_JSON, User.class)).thenReturn(USER_OBJECT);
+        assertEquals("{\"message\":\"user added\"}", repo.addUser(USER_JSON));
     }
 
 

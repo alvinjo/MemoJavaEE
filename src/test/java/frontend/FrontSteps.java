@@ -13,12 +13,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class FrontSteps {
 
-    private WebDriver driver;
-    private String GECKO_DRIVER_PATH = "C:\\Users\\Alvin\\IdeaProjects\\Memo\\src\\test\\resources";
-    private String URL = "http://http://127.0.0.1:3000/";
-    private LoginPage login;
-    RegisterPage register;
-//    UserPage userPage;
+    private static WebDriver driver;
+    private String GECKO_DRIVER_PATH = "C:\\Users\\Alvin\\IdeaProjects\\Memo\\src\\test\\resources\\geckodriver.exe";
+    private String URL = "http://127.0.0.1:3000/";
+
+    private MainPage mainPage;
     private String USER_IN = "one";
     private String PASS_IN = "two";
 
@@ -34,42 +33,40 @@ public class FrontSteps {
     @Given("^the correct web address$")
     public void the_correct_web_address(){
         driver.get(URL);
-        login = PageFactory.initElements(driver, LoginPage.class);
-//        register = PageFactory.initElements(driver, RegisterPage.class);
-//        userPage = PageFactory.initElements(driver, UserPage.class);
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @When("^I enter my user credentials and press login$")
     public void i_enter_my_user_credentials_and_press_login(){
-        login.getUserInput().sendKeys(USER_IN);
-        login.getPasswordInput().sendKeys(PASS_IN);
-        login.loginClick();
+        mainPage.getUserInput().sendKeys(USER_IN);
+        mainPage.getPasswordInput().sendKeys(PASS_IN);
+        mainPage.getLoginButton().click();
     }
 
     @Then("^I am taken to my user page$")
     public void i_am_taken_to_my_user_page(){
-        Assert.assertEquals(USER_IN, login.getUserHeader().getText());
+        Assert.assertEquals(USER_IN, mainPage.getUserHeader().getText());
     }
 
     @When("^I enter value in field and press add button$")
     public void i_enter_value_in_field_and_press_add_button(){
-        login.getAddNoteField().sendKeys("New note");
-        login.getAddButton().click();
+        mainPage.getAddNoteField().sendKeys("New note");
+        mainPage.getAddButton().click();
     }
 
     @Then("^This note is added$")
     public void this_note_is_added(){
-        Assert.assertEquals("New note",login.getNoteContainer().getText());
+        Assert.assertEquals("New note", mainPage.getNoteContainer().getText());
     }
 
     @When("^I press delete button$")
     public void i_press_delete_button(){
-        login.getDeleteButton().click();
+        mainPage.getDeleteButton().click();
     }
 
     @Then("^The note is deleted$")
     public void the_note_is_deleted(){
-        Assert.assertTrue(login.getNoteContainer().getText().equals("New note"));
+        Assert.assertTrue(mainPage.getNoteContainer().getText().equals("New note"));
     }
 
     @When("^I change the value and press update button$")
